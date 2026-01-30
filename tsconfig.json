@@ -11,8 +11,9 @@
     "resolveJsonModule": true,
     "jsx": "preserve",
     "types": ["node"],
-    "baseUrl": "."
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
 }
