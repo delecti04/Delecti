@@ -1,0 +1,31 @@
+-- Media table
+create table if not exists journal_media (
+  id uuid primary key default gen_random_uuid(),
+  journal_id uuid references journals(id) on delete cascade,
+  path text not null,
+  mime text,
+  created_at timestamp default now()
+);
+
+-- Enable RLS
+alter table customers enable row level security;
+alter table dogs enable row level security;
+alter table journals enable row level security;
+alter table bookings enable row level security;
+alter table journal_media enable row level security;
+
+-- Policies: allow all for authenticated users (du er eneste bruger i starten)
+create policy "customers_all_auth" on customers for all
+to authenticated using (true) with check (true);
+
+create policy "dogs_all_auth" on dogs for all
+to authenticated using (true) with check (true);
+
+create policy "journals_all_auth" on journals for all
+to authenticated using (true) with check (true);
+
+create policy "bookings_all_auth" on bookings for all
+to authenticated using (true) with check (true);
+
+create policy "journal_media_all_auth" on journal_media for all
+to authenticated using (true) with check (true);
